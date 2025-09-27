@@ -1,0 +1,77 @@
+SDG15.1:
+  include:
+    - r"\bprotected (?:area|site|landscape|territory|forest|reserve)s?\b"
+    - r"\bnational parks?\b|\bnature reserves?\b|\bforest reserves?\b"
+    - r"\b(conservanc(?:y|ies)|community conservanc(?:y|ies))\b"
+    - r"\bhabitat (?:restoration|rehabilitation)\b|\becosystem (?:restoration|rehabilitation)\b"
+    - r"\bwetlands?\b|\bramsar\b|\briparian\b|\bpeatlands?\b"
+    - r"\bwatersheds?\b|\briver basins?\b|\bcatchments?\b|\bcatchment management\b"
+    - r"\blandscape (?:restoration|management)\b|\becological corridors?\b|\bgreen infrastructure\b"
+    - r"\bparc nationa(?:l|ux)\b|\bgestion forestiere\b"
+    - r"protected area(s)?|protected site(s)?|forest reserve(s)?|community conservanc(?:y|ies)"
+    - r"ecosystem restoration|habitat rehabilitation|peatland(s)?|riparian"
+    - r"catchment(s)?|catchment management|ecological corridors?|green infrastructure"
+
+  exclude:
+    - r"\bindustrial parks?\b|\bbusiness parks?\b|\bparking\b|\bpark(?:\s*and\s*ride)?\b"
+    - r"\bdata ecosystems?\b|\binnovation ecosystems?\b"
+    r"industrial park(s)?|business park(s)?|parking"
+
+SDG15.2:
+  include:
+    - r"\bsustainable forest management\b|\bsfm\b"
+    - r"\breforestation\b|\bafforestation\b|\bforest restoration\b|\bsilviculture\b"
+    - r"\bforest (?:governance|monitoring|inventory)\b"
+    - r"\billegal logging\b|\btimber traceability\b|\bchain of custody\b"
+    - r"\bredd\+?\b|\bforest certification\b|\bfsc\b|\bcommunity forestry\b"
+  exclude:
+    - r"\blogging platform\b|\blogging tools?\b"   # avoid NLP/IT “logging”
+
+SDG15.3:
+  include:
+    - r"\bdesertification\b|\banti[- ]desertification\b|\bunccd\b"
+    - r"\bland degradation\b|\bdegraded land\b|\bldn\b|\bland degradation neutrality\b"
+    - r"\bsoil erosion\b|\bgully (?:control|rehabilitation)\b|\bdune stabilization\b"
+    - r"\bsustainable land management\b|\bslm\b|\brangeland (?:management|restoration)\b"
+  exclude:
+    - r"\bdata degradation\b"
+
+SDG15.4:
+  include:
+    - r"\bmountain ecosystems?\b|\bmontane\b|\bupland\b|\balpine\b|\bhighland\b"
+    - r"\bmountain (?:biodiversity|conservation|restoration)\b"
+
+SDG15.5:
+  include:
+    - r"\bwildlife (?:protection|conservation|recovery)\b"
+    - r"\bpoach(?:ing)?\b|\banti[- ]poaching\b|\branger patrols?\b"
+    - r"\bendangered species\b|\bthreatened species\b|\biucn red list\b"
+    - r"\bhabitat loss\b|\bbiodiversity loss\b"
+  exclude:
+    - r"\bhuman trafficking\b"   # keep wildlife-specific cases for 15.7
+
+SDG15.7:
+  include:
+    - r"\billegal wildlife trade\b|\bwildlife trafficking\b|\btraffick(?:ing)? in wildlife\b"
+    - r"\bivory\b|\brhino horn\b|\bpangolin\b|\bbushmeat\b|\bsnares?\b"
+    - r"\bcustoms (?:seizures?|enforcement)\b|\bforensics?\b|\binterdiction\b"
+  exclude:
+    - r"\bhuman trafficking\b"
+
+SDG15.8:
+  include:
+    - r"\binvasive (?:alien )?species\b|\bias\b"
+    - r"\beradication of invasive\b|\binvasive species (?:control|management)\b"
+    - r"\bbiosecurity\b|\bquarantine\b|\bphytosanitary\b"
+    - r"\binvasive (plants?|animals?)\b"
+  exclude:
+    - r"\b(invasive )?surgery\b"   # medical contexts
+
+SDG15.9:
+  include:
+    - r"\becosystem services?\b|\bnatural capital\b|\becosystem accounting\b|\bseea(?:\s*ea)?\b"
+    - r"\bbiodiversity mainstream(?:ing)?\b|\bbiodiversity accounting\b|\bbiodiversity valuation\b"
+    - r"\bstrategic environmental assessment\b|\bsea\b|\besia\b"
+    - r"\bspatial planning\b|\bland[- ]use planning\b|\bterritorial planning\b"
+  exclude:
+    - r"\bsea\b.*\bmarin(e|a)\b"   # avoid marine SEA cases (SDG14)

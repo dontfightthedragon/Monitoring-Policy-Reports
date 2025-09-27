@@ -1,0 +1,33 @@
+{
+  "filtered_columns": [
+    "activity_id",
+    "biodiversity",
+    "donor_name",
+    "language",
+    "recipient_name",
+    "text",
+    "year"
+  ],
+  "dedup_columns": [
+    "activity_id",
+    "biodiversity",
+    "donor_name",
+    "language",
+    "recipient_name",
+    "text",
+    "year"
+  ],
+  "filtered_rows": 2478125,
+  "dedup_rows": 1144197,
+  "filtered_year_min": 2015,
+  "filtered_year_max": 2023,
+  "dedup_year_min": 2015,
+  "dedup_year_max": 2023,
+  "filtered_short_text": 0,
+  "dedup_short_text": 0,
+  "filtered_biod_nulls": 823409,
+  "filtered_biod_null_rate": 0.3322709709962169,
+  "dedup_biod_nulls": 279160,
+  "dedup_biod_null_rate": 0.2439789651607197,
+  "filtered_duplicate_groups": 200
+}

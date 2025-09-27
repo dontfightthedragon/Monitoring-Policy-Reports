@@ -1,0 +1,14 @@
+[
+  {
+    "name": "filtered_bad_language",
+    "detail": "2478125 rows not in allowed ['en', 'fr']"
+  },
+  {
+    "name": "dedup_bad_language",
+    "detail": "1144197 rows not in allowed ['en', 'fr']"
+  },
+  {
+    "name": "filtered_has_duplicates",
+    "detail": "1641341 duplicate rows across 200 groups"
+  }
+]

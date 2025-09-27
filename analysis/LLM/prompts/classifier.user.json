@@ -1,0 +1,9 @@
+{
+  "instruction": "Classify the project.",
+  "schema": {
+    "primary_label": "string",
+    "sdg15_targets": "array[string]",
+    "rationale": "string"
+  },
+  "text": "{text_for_llm}"
+}
