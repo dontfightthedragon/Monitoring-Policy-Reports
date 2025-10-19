@@ -1,3 +1,33 @@
 __pycache__/
+*.pyc
 .venv/
+.env
 .ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Data (large)
+dataset/
+outputs/
+*.parquet
+*.feather
+*.npz
+*.npy
+
+# LLM caches and temp
+analysis/LLM/cache*/
+analysis/LLM/**/cache*/
+analysis/LLM/**/logs/
+
+# Generated figures (keep PDFs in git; ignore heavy rasters)
+analysis/**/figures/**/*.png
+analysis/**/figures/**/*.jpg
+reports/figures/**/*.png
+reports/figures/**/*.jpg
+
+# Local configs/secrets
+.env.local
+.python-version
