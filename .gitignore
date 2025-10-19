@@ -31,3 +31,6 @@ reports/figures/**/*.jpg
 # Local configs/secrets
 .env.local
 .python-version
+reports/figures/artifacts/
+reports/figures/sdg15_report/artifacts/
+reports/figures/sdg15_report/tables/top400000_examples.csv
