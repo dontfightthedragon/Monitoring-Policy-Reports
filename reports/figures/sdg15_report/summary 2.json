@@ -1,0 +1,13 @@
+{
+  "rows": 400000,
+  "has_label": true,
+  "prevalence": 0.08629,
+  "has_year": true,
+  "topk": 400000,
+  "outputs": {
+    "hist": "reports/figures/sdg15_report/figures/sdg15_score_hist.png",
+    "by_label": "reports/figures/sdg15_report/figures/sdg15_score_by_label.png",
+    "timeseries": "reports/figures/sdg15_report/figures/sdg15_score_timeseries.png",
+    "top_examples": "reports/figures/sdg15_report/tables/top400000_examples.csv"
+  }
+}

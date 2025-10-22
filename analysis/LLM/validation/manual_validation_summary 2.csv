@@ -1,0 +1,5 @@
+Metric,Value
+Accuracy vs. human,0.670
+Cohen’s κ (primary),0.588
+"Mean Jaccard (targets, all)",0.485
+"Mean Jaccard (targets, union>0)",0.434

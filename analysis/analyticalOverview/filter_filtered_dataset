@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+import pandas as pd, numpy as np, json
+from pathlib import Path
+
+#  paths 
+SRC  = Path("/Users/johannahofmann/Desktop/Bachelorarbeit/Thesis_rep/dataset/temporaryFileToWorkWith/CRS_textprep.parquet")
+ROOT = Path("/Users/johannahofmann/Desktop/Bachelorarbeit/Thesis_rep/analysis/analyticalOverview")
+ROOT.mkdir(parents=True, exist_ok=True)
+
+#  load
+df = pd.read_parquet(SRC)
+df["biodiversity"] = pd.to_numeric(df["biodiversity"], errors="coerce").astype("Int64")
+for c in ["usd_disbursement_defl", "usd_commitment_defl"]:
+    if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce")
+
+#  filter to biodiversity (Rio 1/2) 
+bio = df[df["biodiversity"].isin([1,2])].copy()
+
+# helpers (intensity)
+weight_map = {1: 0.5, 2: 1.0}
+bio["bio_w"]   = bio["biodiversity"].map(weight_map).astype(float)
+bio["bio_bin"] = 1
+
+#  deduplicate by activity_id on the biodiversity subset
+agg = (bio.groupby("activity_id", as_index=True)
+         .agg({
+             "usd_disbursement_defl":"sum",
+             "usd_commitment_defl":"sum",
+             "bio_bin":"sum",
+             "bio_w":"sum",
+             "year":"first",
+             "donor_name":"first",
+             "recipient_name":"first",
+             "recipient_code":"first",
+             "language":"first",
+             "text_en":"first",
+             "text_clean":"first",
+             "biodiversity":"max"  
+         })
+         .reset_index())
+
+# quick checks
+print(f"Rows in bio subset: {len(bio):,}")
+print(f"Rows after dedupe: {len(agg):,}")
+print("Negative disbursements (after sum):", (agg["usd_disbursement_defl"] < 0).sum())
+
+
+
+bio.to_parquet(ROOT / "CRS_biodiv_rio12.parquet", index=False)          # 1
+agg.to_parquet(ROOT / "biodiv_dedup.parquet", index=False)              # 2
+
+desc = agg[agg["usd_disbursement_defl"] >= 0].copy()
+desc.to_parquet(ROOT / "biodiv_dedup_desc.parquet", index=False)        # 3
+
+M = 1e6
+
+# yearly panel
+yearly = (desc.groupby("year", as_index=False)
+            .agg(usd_disb=("usd_disbursement_defl","sum"),
+                 proj_n=("activity_id","nunique"),
+                 bio_wtd=("bio_w","sum")))
+yearly["usd_disb"] /= M
+yearly["avg_project_size"] = yearly["usd_disb"] / yearly["proj_n"]
+yearly["bio_intensity"]    = yearly["bio_wtd"] / yearly["proj_n"]
+yearly.sort_values("year").to_csv(ROOT / "panel_year.csv", index=False)                    # 4
+
+# recipients by USD
+recip_usd = (desc.groupby("recipient_name", as_index=False)
+               .agg(usd_disb=("usd_disbursement_defl","sum"),
+                    proj_n=("activity_id","nunique")))
+recip_usd["usd_disb"] /= M
+recip_usd.sort_values("usd_disb", ascending=False).to_csv(ROOT / "panel_recipient_by_usd.csv", index=False)   # 5
+
+# recipients by count
+recip_cnt = recip_usd.sort_values("proj_n", ascending=False)
+recip_cnt.to_csv(ROOT / "panel_recipient_by_count.csv", index=False)                                         # 6
+
+# donors by USD
+donor_usd = (desc.groupby("donor_name", as_index=False)
+              .agg(usd_disb=("usd_disbursement_defl","sum"),
+                   proj_n=("activity_id","nunique")))
+donor_usd["usd_disb"] /= M
+donor_usd.sort_values("usd_disb", ascending=False).to_csv(ROOT / "panel_donor_by_usd.csv", index=False)       # 7
+
+# donors by count
+donor_cnt = donor_usd.sort_values("proj_n", ascending=False)
+donor_cnt.to_csv(ROOT / "panel_donor_by_count.csv", index=False)                                             # 8
+
+# --- optional: concentration (recipients) ---
+rvals = recip_usd["usd_disb"].sort_values(ascending=False).to_numpy()
+cum_f = np.cumsum(rvals) / rvals.sum()
+cum_n = np.arange(1, len(rvals)+1) / len(rvals)
+pd.DataFrame({"cum_recipients": cum_n, "cum_funding": cum_f}).to_csv(ROOT / "lorenz_recipient.csv", index=False)
+
+top10_share = float(rvals[:10].sum() / rvals.sum()) if len(rvals) >= 10 else float("nan")
+hhi = float(((rvals / rvals.sum())**2).sum())
+with open(ROOT / "concentration_stats.json", "w") as f:
+    json.dump({"top10_share": top10_share, "recipient_hhi": hhi}, f, indent=2)
+
+print("\nSaved all outputs to:", ROOT)
+print("Reminder: amounts in panels are *Millions* of constant USD; scope = Rio {1,2}; negatives excluded in descriptives.")

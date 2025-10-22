@@ -1,0 +1,43 @@
+target_trigger,matched_phrase,count
+SDG15.1,river,7339
+SDG15.1,lake,3489
+SDG15.1,wetland,740
+SDG15.1,catchment,409
+SDG15.1,freshwater,374
+SDG15.1,ramsar,241
+SDG15.1,riparian,177
+SDG15.1,floodplain,74
+SDG15.2,forest management,1159
+SDG15.2,sustainable forest management,962
+SDG15.2,illegal logging,222
+SDG15.2,reforest,88
+SDG15.2,redd+,31
+SDG15.2,afforest,4
+SDG15.3,land degradation,627
+SDG15.3,desertification,535
+SDG15.3,erosion control,41
+SDG15.3,soil restoration,30
+SDG15.3,restore degraded land,5
+SDG15.3,rangeland restoration,3
+SDG15.4,mountain,569
+SDG15.4,alpine,5
+SDG15.5,biodiversity loss,215
+SDG15.5,habitat loss,170
+SDG15.5,habitat restoration,87
+SDG15.5,kba,28
+SDG15.5,key biodiversity area,23
+SDG15.5,species recovery,19
+SDG15.5,species decline,3
+SDG15.7,poaching,1396
+SDG15.7,wildlife trafficking,1380
+SDG15.7,anti-poaching,354
+SDG15.7,antipoaching,4
+SDG15.8,invasive species,478
+SDG15.8,invasive alien species,92
+SDG15.8,biosecurity,43
+SDG15.9,spatial planning,263
+SDG15.9,mainstreaming biodiversity,112
+SDG15.9,biodiversity policy,90
+SDG15.9,land-use planning,36
+SDG15.9,nbsap,6
+SDG15.9,biodiversity planning,3

@@ -34,3 +34,4 @@ reports/figures/**/*.jpg
 reports/figures/artifacts/
 reports/figures/sdg15_report/artifacts/
 reports/figures/sdg15_report/tables/top400000_examples.csv
+reports/figures/sdg15_report/tables/top400000_examples*.csv

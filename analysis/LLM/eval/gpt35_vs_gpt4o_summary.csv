@@ -1,0 +1,2 @@
+n_overlap,agreement,cohen_kappa,JSD_primary,mean_Jaccard_targets,Δshare_FORESTS_LAND(3.5-4o),Δshare_WILDLIFE_SPECIES,Δshare_WATER_MARINE,Δshare_CROSS_CUTTING,Δshare_NONE
+39082,0.6463,0.5615,0.1905,0.7147,0.0943,0.0995,0.0119,-0.1674,-0.0384
